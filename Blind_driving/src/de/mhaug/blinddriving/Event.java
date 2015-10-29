@@ -1,5 +1,12 @@
 package de.mhaug.blinddriving;
 
+/**
+ * This class is used to communicate between the UI and the Simulator. It should
+ * be extended when needed.
+ * 
+ * @author martin
+ *
+ */
 public class Event {
 	public final String description;
 	public final EventType type;

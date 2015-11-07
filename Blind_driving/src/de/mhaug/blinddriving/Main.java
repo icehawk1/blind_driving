@@ -10,13 +10,12 @@ import de.mhaug.blinddriving.ui.EventListener;
 public class Main {
 
 	public static void main(String[] args) {
-		DrivingSimulator drivingSimulator = new DrivingSimulator();
 		EventListener uiEventListener = new EventListener();
 
-		drivingSimulator.addObserver(uiEventListener);
-		uiEventListener.addObserver(drivingSimulator);
+		DrivingSimulator.getInstance().addObserver(uiEventListener);
+		uiEventListener.addObserver(DrivingSimulator.getInstance());
 
-		Thread drivingSimulatorThread = new Thread(drivingSimulator);
+		Thread drivingSimulatorThread = new Thread(DrivingSimulator.getInstance());
 		drivingSimulatorThread.setName("Driving Simulator");
 		drivingSimulatorThread.start();
 

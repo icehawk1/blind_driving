@@ -1,10 +1,11 @@
 package de.mhaug.blinddriving.simulator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import de.mhaug.blinddriving.Event;
-import de.mhaug.blinddriving.EventType;
 
 /**
  * This class simulates a journey with an autonomous car and sends out events
@@ -12,6 +13,12 @@ import de.mhaug.blinddriving.EventType;
  * from the Driver.
  */
 public class DrivingSimulator extends Observable implements Runnable, Observer {
+	final List<Situation> possibleSituations = new ArrayList<>();
+	private static volatile DrivingSimulator instance = null;
+
+	private DrivingSimulator() {
+	}
+
 	@Override
 	public void run() {
 		try {
@@ -19,46 +26,23 @@ public class DrivingSimulator extends Observable implements Runnable, Observer {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
 
+	public static synchronized DrivingSimulator getInstance() {
+		if (instance == null) {
+			instance = new DrivingSimulator();
+		}
+
+		return instance;
 	}
 
 	private void runActually() throws InterruptedException {
-		sendEvent(EventType.INFO, "Starting engine");
-		sendEvent(EventType.INFO, "Fuel at 80 percent");
-		sendEvent(EventType.INFO, "Status normal, no defects");
-		Thread.sleep(10000);
 
-		sendEvent(EventType.INFO, "Road clean, sunny weather, no pedestrians, low traffic");
-		Thread.sleep(2000);
-		sendEvent(EventType.INFO, "Entering road");
-		sendEvent(EventType.INFO, "Drive mode: Normal");
-		sendEvent(EventType.INFO, "Driving at 50 kph");
-
-		Thread.sleep(5000);
-		sendEvent(EventType.INFO, "Decelerating to 20 kph");
-		Thread.sleep(1000);
-		sendEvent(EventType.INFO, "Turning left into Bond street");
-		Thread.sleep(3000);
-		sendEvent(EventType.INFO, "Accelarating to 50 kph");
-
-		Thread.sleep(30000);
-		sendEvent(EventType.INFO, "Children on the sidewalk");
-		sendEvent(EventType.INFO, "Drive mode: Careful");
-		sendEvent(EventType.INFO, "Decelarating to 20 kph");
-		Thread.sleep(10000);
-		sendEvent(EventType.INFO, "Drive mode: Normal");
-		sendEvent(EventType.INFO, "Accelarating to 50 kph");
-
-		Thread.sleep(40000);
-		sendEvent(EventType.INFO, "Target on left side");
-		sendEvent(EventType.INFO, "Parking");
-		Thread.sleep(30000);
-		sendEvent(EventType.INFO, "You can turn the engine off now");
 	}
 
-	private void sendEvent(EventType type, String description) {
+	void sendEvent(Event event) {
 		this.setChanged();
-		this.notifyObservers(new Event(type, description));
+		this.notifyObservers(event);
 	}
 
 	@Override

@@ -10,6 +10,8 @@ package de.mhaug.blinddriving;
 public class Event {
 	public final String description;
 	public final EventType type;
+	public final boolean signal_left = true; 
+	public final boolean signal_right = true;
 
 	public Event(EventType type, String description) {
 		this.description = description;
@@ -19,5 +21,17 @@ public class Event {
 	@Override
 	public String toString() {
 		return type + ": " + description;
+	}
+	
+	public String getText(){
+		return description;
+	}
+	
+	public Boolean getSignalLeft(){
+		return signal_left;
+	}
+	
+	public Boolean getSignalRight(){
+		return signal_right;
 	}
 }

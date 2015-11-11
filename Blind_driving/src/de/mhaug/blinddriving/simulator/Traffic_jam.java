@@ -26,4 +26,8 @@ public class Traffic_jam extends Situation {
 		simulator.sendEvent(new Event(EventType.INFO, "Reached 50 kph"));
 	}
 
+	@Override
+	protected String getDescription() {
+		return "There is a traffic jam";
+	}
 }

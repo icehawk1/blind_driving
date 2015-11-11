@@ -25,4 +25,8 @@ public class TrafficLight extends Situation {
 		simulator.sendEvent(new Event(EventType.INFO, "Accelerating to 50 kph"));
 	}
 
+	@Override
+	protected String getDescription() {
+		return "We stop before a traffic light";
+	}
 }

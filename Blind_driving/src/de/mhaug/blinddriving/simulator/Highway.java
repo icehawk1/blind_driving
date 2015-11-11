@@ -30,4 +30,9 @@ public class Highway extends Situation {
 	public String toString() {
 		return super.toString();
 	}
+
+	@Override
+	protected String getDescription() {
+		return "We are on a highway and overtake three trucks";
+	}
 }

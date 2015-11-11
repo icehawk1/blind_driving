@@ -33,4 +33,9 @@ public class Children_on_sidewalk extends Situation {
 	public String toString() {
 		return "There are children on the sidewalk";
 	}
+
+	@Override
+	protected String getDescription() {
+		return "There are children on the sidewalk and we need to drive carefully";
+	}
 }

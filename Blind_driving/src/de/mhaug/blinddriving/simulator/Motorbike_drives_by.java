@@ -4,7 +4,6 @@ import de.mhaug.blinddriving.Event;
 import de.mhaug.blinddriving.EventType;
 
 public class Motorbike_drives_by extends Situation {
-
 	@Override
 	protected void begin_situation() {
 		simulator.sendEvent(new Event(EventType.INFO, "Traffic stops"));
@@ -31,4 +30,8 @@ public class Motorbike_drives_by extends Situation {
 		simulator.sendEvent(new Event(EventType.INFO, "Accelerating to 50 kph"));
 	}
 
+	@Override
+	protected String getDescription() {
+		return "Motorbike drives by between two queues. The car thinks he can start and the supervisor has to stop him.";
+	}
 }

@@ -24,6 +24,8 @@ abstract class Situation {
 
 	protected abstract void leave_situation();
 
+	protected abstract String getDescription();
+
 	public void sleep(int seconds) {
 		try {
 			Thread.sleep(seconds * 1000);

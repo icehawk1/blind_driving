@@ -20,4 +20,9 @@ public class Being_overtaken_on_wrong_side extends Situation {
 	@Override
 	protected void leave_situation() {
 	}
+
+	@Override
+	protected String getDescription() {
+		return "A vehicle is overtaking on the wrong side";
+	}
 }

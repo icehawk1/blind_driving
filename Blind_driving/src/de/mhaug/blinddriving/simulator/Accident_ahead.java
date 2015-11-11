@@ -25,4 +25,9 @@ public class Accident_ahead extends Situation {
 
 	}
 
+	@Override
+	protected String getDescription() {
+		return "There is an accident and we need to stop and help. The car does not realise that.";
+	}
+
 }

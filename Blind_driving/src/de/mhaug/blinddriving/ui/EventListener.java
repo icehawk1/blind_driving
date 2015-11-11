@@ -1,12 +1,15 @@
 package de.mhaug.blinddriving.ui;
 
+import java.io.File;
 import java.util.Observable;
 import java.util.Observer;
 
-import java.io.*;
-import com.sun.speech.freetts.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
-import javax.sound.sampled.*;
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
 
 import de.mhaug.blinddriving.Event;
 import de.mhaug.blinddriving.EventType;
@@ -24,11 +27,11 @@ public class EventListener extends Observable implements Runnable, Observer {
 		assert rawEvent instanceof Event;
 		Event event = (Event) rawEvent;
 
-//		System.out.println("Event (" + event + ") occuredgggg on " + source);
+		// System.out.println("Event (" + event + ") occuredgggg on " + source);
 		speakOut(event.getText());
-		if(event.getSignalLeft() || event.getSignalRight()){
+		if (event.getSignalLeft() || event.getSignalRight()) {
 			// waiting for signals from event to assign left or right
-			controlVibrate(event.getSignalLeft(),event.getSignalRight()); 
+			controlVibrate(event.getSignalLeft(), event.getSignalRight());
 		}
 	}
 
@@ -43,40 +46,39 @@ public class EventListener extends Observable implements Runnable, Observer {
 		this.setChanged();
 		this.notifyObservers(new Event(EventType.INFO, "Ich bin ein Event vom UI"));
 	}
-	
-	public void speakOut(String text){
+
+	public void speakOut(String text) {
 		String voiceName = "kevin16"; // kevin, kevin16, alan
 		Voice voice;
 		VoiceManager vm = VoiceManager.getInstance();
 		voice = vm.getVoice(voiceName);
-		
+
 		voice.allocate();
-		
-		try{
+
+		try {
 			voice.speak(text);
-		}catch(Exception e){
-			System.out.println("Error speakout: "+e);
+		} catch (Exception e) {
+			System.out.println("Error speakout: " + e);
 		}
-		
+
 	}
-	
-	public void controlVibrate(boolean left, boolean right){
-		
+
+	public void controlVibrate(boolean left, boolean right) {
 		try {
 			Clip clip = AudioSystem.getClip();
 			File file;
-			if(left && right){
+			if (left && right) {
 				file = new File("res/audio_C.wav");
-			} else if(left){
+			} else if (left) {
 				file = new File("res/audio_L.wav");
-			} else{
+			} else {
 				file = new File("res/audio_R.wav");
 			}
-	        AudioInputStream inputStream = AudioSystem.getAudioInputStream(file);
-	        clip.open(inputStream);
-	        clip.start(); 
-	      } catch (Exception e) {
-	        System.err.println(e.getMessage());
-	      }
+			AudioInputStream inputStream = AudioSystem.getAudioInputStream(file);
+			clip.open(inputStream);
+			clip.start();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 	}
 }

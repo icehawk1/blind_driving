@@ -4,11 +4,6 @@ import de.mhaug.blinddriving.Event;
 import de.mhaug.blinddriving.EventType;
 
 public class Children_on_sidewalk extends Situation {
-	private final DrivingSimulator simulator = DrivingSimulator.getInstance();
-
-	public Children_on_sidewalk() {
-	}
-
 	@Override
 	protected void begin_situation() {
 		if (rand.nextBoolean())

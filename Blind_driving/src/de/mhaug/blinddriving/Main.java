@@ -11,11 +11,12 @@ public class Main {
 
 	public static void main(String[] args) {
 		EventListener uiEventListener = new EventListener();
+		DrivingSimulator simulator = new DrivingSimulator();
 
-		DrivingSimulator.getInstance().addObserver(uiEventListener);
-		uiEventListener.addObserver(DrivingSimulator.getInstance());
+		simulator.addObserver(uiEventListener);
+		uiEventListener.addObserver(simulator);
 
-		Thread drivingSimulatorThread = new Thread(DrivingSimulator.getInstance());
+		Thread drivingSimulatorThread = new Thread(simulator);
 		drivingSimulatorThread.setName("Driving Simulator");
 		drivingSimulatorThread.start();
 

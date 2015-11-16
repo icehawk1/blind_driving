@@ -5,6 +5,10 @@ import de.mhaug.blinddriving.EventType;
 
 public class Accident_ahead extends Situation {
 
+	public Accident_ahead(DrivingSimulator simulator) {
+		super(simulator);
+	}
+
 	@Override
 	protected void begin_situation() {
 

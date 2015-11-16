@@ -12,7 +12,6 @@ import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
 
 import de.mhaug.blinddriving.Event;
-import de.mhaug.blinddriving.EventType;
 import de.mhaug.blinddriving.simulator.DrivingSimulator;
 
 /**
@@ -34,6 +33,11 @@ public class EventListener extends Observable implements Runnable, Observer {
 			// waiting for signals from event to assign left or right
 			controlVibrate(event.getSignalLeft(), event.getSignalRight());
 		}
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -45,7 +49,6 @@ public class EventListener extends Observable implements Runnable, Observer {
 		}
 
 		this.setChanged();
-		this.notifyObservers(new Event(EventType.INFO, "Ich bin ein Event vom UI"));
 	}
 
 	public void speakOut(String text) {

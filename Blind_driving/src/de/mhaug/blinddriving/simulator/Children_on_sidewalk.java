@@ -4,6 +4,10 @@ import de.mhaug.blinddriving.Event;
 import de.mhaug.blinddriving.EventType;
 
 public class Children_on_sidewalk extends Situation {
+	public Children_on_sidewalk(DrivingSimulator simulator) {
+		super(simulator);
+	}
+
 	@Override
 	protected void begin_situation() {
 		if (rand.nextBoolean())
@@ -11,16 +15,18 @@ public class Children_on_sidewalk extends Situation {
 		else
 			simulator.sendEvent(new Event(EventType.WARNING, "Children on the right sidewalk", false, true));
 		simulator.sendEvent(new Event(EventType.INFO, "Driving mode: Careful"));
-		simulator.sendEvent(new Event(EventType.INFO, "Decelarating to 20 kph"));
+		simulator.sendEvent(new Event(EventType.INFO, "Decelarating to 10 kph"));
 	}
 
 	@Override
 	protected void in_situation(int duration) {
-		if (rand.nextBoolean()) {
-			sleep(rand.nextInt((int) (duration * 0.8)));
-			simulator.sendEvent(new Event(EventType.WARNING, "Person on the street in 13 meters", true, true));
-		} else
-			sleep(duration);
+		sleep(30);
+		simulator.sendEvent(new Event(EventType.WARNING, "Person on the street 13 meters ahead", true, true));
+		simulator.sendEvent(new Event(EventType.INFO, "Stopping car"));
+		sleep(20);
+		simulator.sendEvent(new Event(EventType.INFO, "Person has left the street"));
+		simulator.sendEvent(new Event(EventType.INFO, "Accelerating"));
+		sleep(10);
 	}
 
 	@Override

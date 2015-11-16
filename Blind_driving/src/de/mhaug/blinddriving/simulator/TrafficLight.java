@@ -5,6 +5,10 @@ import de.mhaug.blinddriving.EventType;
 
 public class TrafficLight extends Situation {
 
+	public TrafficLight(DrivingSimulator simulator) {
+		super(simulator);
+	}
+
 	@Override
 	protected void begin_situation() {
 		simulator.sendEvent(new Event(EventType.INFO, "Green traffic light ahead"));
@@ -16,7 +20,7 @@ public class TrafficLight extends Situation {
 		simulator.sendEvent(new Event(EventType.INFO, "Traffic light turns yellow"));
 		simulator.sendEvent(new Event(EventType.INFO, "Stopping vehicle"));
 		simulator.sendEvent(new Event(EventType.INFO, "Traffic light turns red"));
-		sleep(rand.nextInt(50));
+		sleep(30);
 	}
 
 	@Override

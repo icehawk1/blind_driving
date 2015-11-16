@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
+import java.util.Scanner;
 
 import de.mhaug.blinddriving.Event;
 
@@ -16,18 +17,17 @@ import de.mhaug.blinddriving.Event;
  */
 public class DrivingSimulator extends Observable implements Runnable, Observer {
 	final List<Situation> possibleSituations = new ArrayList<>();
-	private static volatile DrivingSimulator instance = null;
 	private Random rand = new Random();
 
-	private DrivingSimulator() {
-		possibleSituations.add(new Children_on_sidewalk());
-		possibleSituations.add(new Highway());
-		possibleSituations.add(new StopSign());
-		possibleSituations.add(new TrafficLight());
-		possibleSituations.add(new Accident_ahead());
-		possibleSituations.add(new Being_overtaken_on_wrong_side());
-		possibleSituations.add(new Motorbike_drives_by());
-		possibleSituations.add(new Traffic_jam());
+	public DrivingSimulator() {
+		possibleSituations.add(new Children_on_sidewalk(this));
+		possibleSituations.add(new Highway(this));
+		possibleSituations.add(new StopSign(this));
+		possibleSituations.add(new TrafficLight(this));
+		possibleSituations.add(new Accident_ahead(this));
+		possibleSituations.add(new Being_overtaken_on_wrong_side(this));
+		possibleSituations.add(new Motorbike_drives_by(this));
+		possibleSituations.add(new Traffic_jam(this));
 	}
 
 	@Override
@@ -39,15 +39,8 @@ public class DrivingSimulator extends Observable implements Runnable, Observer {
 		}
 	}
 
-	public static synchronized DrivingSimulator getInstance() {
-		if (instance == null) {
-			instance = new DrivingSimulator();
-		}
-
-		return instance;
-	}
-
 	private void runActually() throws InterruptedException {
+		Scanner stdin = new Scanner(System.in);
 		Collections.shuffle(possibleSituations);
 		for (Situation current : possibleSituations) {
 			System.out.println("-------------------------------------------");
@@ -58,8 +51,12 @@ public class DrivingSimulator extends Observable implements Runnable, Observer {
 			current.begin_situation();
 			current.in_situation(rand.nextInt(120));
 			current.leave_situation();
-			Thread.sleep(10);
+
+			System.out.println("Please press enter for the next situation");
+			stdin.nextLine();
 		}
+		System.out.println("We are finished. :)");
+		stdin.close();
 	}
 
 	void sendEvent(Event event) {

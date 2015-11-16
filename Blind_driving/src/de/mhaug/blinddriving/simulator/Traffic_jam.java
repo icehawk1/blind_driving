@@ -5,6 +5,10 @@ import de.mhaug.blinddriving.EventType;
 
 public class Traffic_jam extends Situation {
 
+	public Traffic_jam(DrivingSimulator simulator) {
+		super(simulator);
+	}
+
 	@Override
 	protected void begin_situation() {
 	}
@@ -23,7 +27,7 @@ public class Traffic_jam extends Situation {
 
 	@Override
 	protected void leave_situation() {
-		simulator.sendEvent(new Event(EventType.INFO, "Reached 50 kph"));
+		simulator.sendEvent(new Event(EventType.INFO, "Reached 50 kph, stopping accelerating"));
 	}
 
 	@Override

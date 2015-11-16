@@ -5,7 +5,11 @@ import java.util.Random;
 abstract class Situation {
 	protected final Random rand = new Random();
 	private int time_remaining;
-	protected final DrivingSimulator simulator = DrivingSimulator.getInstance();
+	protected final DrivingSimulator simulator;
+
+	public Situation(DrivingSimulator simulator) {
+		this.simulator = simulator;
+	}
 
 	public final void generateEvents(int duration) {
 		assert duration > 4;

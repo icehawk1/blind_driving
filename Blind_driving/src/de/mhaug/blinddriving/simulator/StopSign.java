@@ -5,6 +5,10 @@ import de.mhaug.blinddriving.EventType;
 
 public class StopSign extends Situation {
 
+	public StopSign(DrivingSimulator simulator) {
+		super(simulator);
+	}
+
 	@Override
 	protected void begin_situation() {
 	}
@@ -12,10 +16,7 @@ public class StopSign extends Situation {
 	@Override
 	protected void in_situation(int duration) {
 		simulator.sendEvent(new Event(EventType.INFO, "Stop sign ahead"));
-		if (rand.nextBoolean())
-			simulator.sendEvent(new Event(EventType.INFO, "Stopping vehicle"));
-		else
-			System.out.println("Supervisor should brake now");
+		simulator.sendEvent(new Event(EventType.INFO, "Stopping vehicle"));
 		sleep(5);
 	}
 
@@ -26,6 +27,6 @@ public class StopSign extends Situation {
 
 	@Override
 	protected String getDescription() {
-		return "There is a stop sign and we need to stop. If the car does not stop, the supervisor should.";
+		return "There is a stop sign and we need to stop.";
 	}
 }

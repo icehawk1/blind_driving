@@ -24,7 +24,7 @@ public class EventListener extends Observable implements Runnable, Observer {
 		assert rawEvent instanceof Event;
 		Event event = (Event) rawEvent;
 
-//		System.out.println("Event (" + event + ") occuredgggg on " + source);
+		System.out.println("Event (" + event + ") occuredgggg on " + source);
 		speakOut(event.getText());
 		if(event.getSignalLeft() || event.getSignalRight()){
 			// waiting for signals from event to assign left or right

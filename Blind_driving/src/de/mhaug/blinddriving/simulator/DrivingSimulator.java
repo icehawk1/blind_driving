@@ -1,9 +1,11 @@
 package de.mhaug.blinddriving.simulator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 import de.mhaug.blinddriving.Event;
 
@@ -15,8 +17,17 @@ import de.mhaug.blinddriving.Event;
 public class DrivingSimulator extends Observable implements Runnable, Observer {
 	final List<Situation> possibleSituations = new ArrayList<>();
 	private static volatile DrivingSimulator instance = null;
+	private Random rand = new Random();
 
 	private DrivingSimulator() {
+		possibleSituations.add(new Children_on_sidewalk());
+		possibleSituations.add(new Highway());
+		possibleSituations.add(new StopSign());
+		possibleSituations.add(new TrafficLight());
+		possibleSituations.add(new Accident_ahead());
+		possibleSituations.add(new Being_overtaken_on_wrong_side());
+		possibleSituations.add(new Motorbike_drives_by());
+		possibleSituations.add(new Traffic_jam());
 	}
 
 	@Override
@@ -37,7 +48,18 @@ public class DrivingSimulator extends Observable implements Runnable, Observer {
 	}
 
 	private void runActually() throws InterruptedException {
+		Collections.shuffle(possibleSituations);
+		for (Situation current : possibleSituations) {
+			System.out.println("-------------------------------------------");
+			System.out.println(current.getDescription());
+			System.out.println("----------");
+			System.out.println();
 
+			current.begin_situation();
+			current.in_situation(rand.nextInt(120));
+			current.leave_situation();
+			Thread.sleep(10);
+		}
 	}
 
 	void sendEvent(Event event) {

@@ -5,10 +5,7 @@ import java.util.Random;
 abstract class Situation {
 	protected final Random rand = new Random();
 	private int time_remaining;
-
-	public Situation() {
-		DrivingSimulator.getInstance().possibleSituations.add(this);
-	}
+	protected final DrivingSimulator simulator = DrivingSimulator.getInstance();
 
 	public final void generateEvents(int duration) {
 		assert duration > 4;
@@ -26,6 +23,8 @@ abstract class Situation {
 	protected abstract void in_situation(int duration);
 
 	protected abstract void leave_situation();
+
+	protected abstract String getDescription();
 
 	public void sleep(int seconds) {
 		try {

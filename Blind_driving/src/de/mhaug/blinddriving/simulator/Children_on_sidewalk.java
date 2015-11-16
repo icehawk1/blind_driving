@@ -4,11 +4,6 @@ import de.mhaug.blinddriving.Event;
 import de.mhaug.blinddriving.EventType;
 
 public class Children_on_sidewalk extends Situation {
-	private final DrivingSimulator simulator = DrivingSimulator.getInstance();
-
-	public Children_on_sidewalk() {
-	}
-
 	@Override
 	protected void begin_situation() {
 		if (rand.nextBoolean())
@@ -37,5 +32,10 @@ public class Children_on_sidewalk extends Situation {
 	@Override
 	public String toString() {
 		return "There are children on the sidewalk";
+	}
+
+	@Override
+	protected String getDescription() {
+		return "There are children on the sidewalk and we need to drive carefully";
 	}
 }

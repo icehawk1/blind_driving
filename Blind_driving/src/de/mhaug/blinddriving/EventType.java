@@ -1,5 +1,5 @@
 package de.mhaug.blinddriving;
 
 public enum EventType {
-	INFO, WARNING
+	INFO, WARNING, ERROR
 }

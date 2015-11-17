@@ -10,19 +10,24 @@ public class Children_on_sidewalk extends Situation {
 
 	@Override
 	protected void begin_situation() {
+		System.err.println("Plug IN the vibration motors");
 		if (rand.nextBoolean())
 			simulator.sendEvent(new Event(EventType.WARNING, "Children on the left sidewalk", true, false));
 		else
 			simulator.sendEvent(new Event(EventType.WARNING, "Children on the right sidewalk", false, true));
+		System.err.println("Plug OFF the vibration motors");
+		sleep(10);
 		simulator.sendEvent(new Event(EventType.INFO, "Driving mode: Careful"));
 		simulator.sendEvent(new Event(EventType.INFO, "Decelarating to 10 kph"));
 	}
 
 	@Override
 	protected void in_situation(int duration) {
+		System.err.println("Plug IN the vibration motors");
 		sleep(30);
 		simulator.sendEvent(new Event(EventType.WARNING, "Person on the street 13 meters ahead", true, true));
 		simulator.sendEvent(new Event(EventType.INFO, "Stopping car"));
+		System.err.println("Plug OFF the vibration motors");
 		sleep(20);
 		simulator.sendEvent(new Event(EventType.INFO, "Person has left the street"));
 		simulator.sendEvent(new Event(EventType.INFO, "Accelerating"));

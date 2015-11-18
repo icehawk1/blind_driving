@@ -15,8 +15,10 @@ public class Being_overtaken_on_wrong_side extends Situation {
 
 	@Override
 	protected void in_situation(int duration) {
+		System.err.println("Plug IN the vibration motors");
 		sleep(5 + rand.nextInt(15));
 		simulator.sendEvent(new Event(EventType.WARNING, "Vehicle overtaking on left side with 80 kph", true, false));
+		System.err.println("Plug OFF the vibration motors");
 		sleep(rand.nextInt(15));
 	}
 

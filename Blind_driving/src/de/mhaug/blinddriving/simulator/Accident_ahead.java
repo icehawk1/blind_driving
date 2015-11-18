@@ -16,7 +16,9 @@ public class Accident_ahead extends Situation {
 
 	@Override
 	protected void in_situation(int duration) {
+		System.err.println("Plug IN the vibration motors");
 		simulator.sendEvent(new Event(EventType.INFO, "Vehicle on sideline", true, false));
+		System.err.println("Plug OFF the vibration motors");
 		sleep(5 + rand.nextInt(5));
 		simulator.sendEvent(new Event(EventType.INFO, "Vehicle on sideline has emergency lights on"));
 		System.out.println("Supervisor should brake now");

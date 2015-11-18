@@ -44,6 +44,7 @@ public class DrivingSimulator extends Observable implements Runnable, Observer {
 		Collections.shuffle(possibleSituations);
 		for (Situation current : possibleSituations) {
 			System.out.println("-------------------------------------------");
+			System.out.println();
 			System.out.println(current.getDescription());
 			System.out.println("----------");
 			System.out.println();

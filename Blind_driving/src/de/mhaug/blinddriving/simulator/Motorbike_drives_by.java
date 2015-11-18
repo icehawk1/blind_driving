@@ -17,11 +17,13 @@ public class Motorbike_drives_by extends Situation {
 
 	@Override
 	protected void in_situation(int duration) {
+		System.err.println("Plug IN the vibration motors");
 		sleep(15);
 		if (rand.nextBoolean())
 			simulator.sendEvent(new Event(EventType.WARNING, "Motorcyclist driving by on left side", true, false));
 		else
 			simulator.sendEvent(new Event(EventType.WARNING, "Motorcyclist driving by on right side", false, true));
+		System.err.println("Plug OUT the vibration motors");
 		sleep(5);
 		simulator.sendEvent(new Event(EventType.INFO, "Vehicle ahead accelerates"));
 		simulator.sendEvent(new Event(EventType.INFO, "Car accelerating to 15 kph"));

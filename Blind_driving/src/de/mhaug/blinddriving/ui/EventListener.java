@@ -52,7 +52,8 @@ public class EventListener extends Observable implements Runnable, Observer {
 	}
 
 	public void speakOut(String text) {
-		String voiceName = "kevin16"; // kevin, kevin16, alan
+		System.setProperty("mbrola.base", "D:/workspace/blind_driving - mbrola/Blind_driving/res/mbrola");
+		String voiceName = "mbrola_us1"; // kevin, kevin16, alan, mbrola_us1, mbrola_us2, mbrola_us3
 		Voice voice;
 		VoiceManager vm = VoiceManager.getInstance();
 		voice = vm.getVoice(voiceName);

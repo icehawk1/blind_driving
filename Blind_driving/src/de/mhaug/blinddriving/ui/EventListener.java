@@ -47,7 +47,6 @@ public class EventListener extends Observable implements Runnable, Observer {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
 		this.setChanged();
 	}
 

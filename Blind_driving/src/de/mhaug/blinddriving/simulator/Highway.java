@@ -14,7 +14,7 @@ public class Highway extends Situation {
 		sleep(40);
 		simulator.sendEvent(new Event(EventType.INFO, "Accelerating to 130 kph"));
 		simulator.sendEvent(new Event(EventType.INFO, "Medium traffic"));
-		simulator.sendEvent(new Event(EventType.INFO, "There are three trucks ahead of ous"));
+		simulator.sendEvent(new Event(EventType.INFO, "There are three trucks ahead of us"));
 	}
 
 	@Override

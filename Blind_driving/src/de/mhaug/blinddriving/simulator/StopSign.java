@@ -17,7 +17,7 @@ public class StopSign extends Situation {
 	protected void in_situation(int duration) {
 		simulator.sendEvent(new Event(EventType.INFO, "Stop sign ahead"));
 		simulator.sendEvent(new Event(EventType.INFO, "Stopping vehicle"));
-		sleep(5);
+		sleep(10);
 	}
 
 	@Override

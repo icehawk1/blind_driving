@@ -1,7 +1,6 @@
 package de.mhaug.blinddriving.simulator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -20,13 +19,13 @@ public class DrivingSimulator extends Observable implements Runnable, Observer {
 	private Random rand = new Random();
 
 	public DrivingSimulator() {
+		possibleSituations.add(new Motorbike_drives_by(this));
 		possibleSituations.add(new Children_on_sidewalk(this));
 		possibleSituations.add(new Highway(this));
 		possibleSituations.add(new StopSign(this));
 		possibleSituations.add(new TrafficLight(this));
 		possibleSituations.add(new Accident_ahead(this));
 		possibleSituations.add(new Being_overtaken_on_wrong_side(this));
-		possibleSituations.add(new Motorbike_drives_by(this));
 		possibleSituations.add(new Traffic_jam(this));
 	}
 
@@ -41,7 +40,7 @@ public class DrivingSimulator extends Observable implements Runnable, Observer {
 
 	private void runActually() throws InterruptedException {
 		Scanner stdin = new Scanner(System.in);
-		Collections.shuffle(possibleSituations);
+		// Collections.shuffle(possibleSituations);
 		for (Situation current : possibleSituations) {
 			System.out.println("-------------------------------------------");
 			System.out.println();

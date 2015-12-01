@@ -8,8 +8,9 @@ import de.mhaug.blinddriving.ui.EventListener;
  * other. The later means that they can send and receive Events from each other.
  */
 public class Main {
-
 	public static void main(String[] args) {
+		System.out.println("Remember: The participants should not be able to see whats on the screen!");
+
 		EventListener uiEventListener = new EventListener();
 		DrivingSimulator simulator = new DrivingSimulator();
 
